@@ -19,7 +19,8 @@ static void pixel_rgb565(int x, int y, unsigned int color)
 */
 static void pixel_rgb888(int x, int y, unsigned int color)
 {
-	*((int *)info->addr + x + info->x_real_size * y) = color; 
+	//printf("%s \n", __func__);	
+	*((u32 *)info->addr + x + info->x_real_size * y) = color; 
 }
 
 /*
@@ -27,7 +28,7 @@ static void pixel_rgb888(int x, int y, unsigned int color)
 */
 static void point(int x, int y,  unsigned int size, unsigned int color)
 {
-	printf("这个函数还没有添加。");	
+	printf("这个函数还没有添加。\n");	
 }
 
 
@@ -68,10 +69,6 @@ static void square(int x, int y, int xlength, int ylength, unsigned int color)
 */
 static void display_info()
 {
-	//获取var对象
-	ioctl(info->fd, FBIOGET_VSCREENINFO, &info->var);
-	//获取fix对象
-	ioctl(info->fd, FBIOGET_FSCREENINFO, &info->fix);
 	
 //	info->draw_pixel = draw_pixel_rgb888;
 
@@ -115,8 +112,12 @@ int make_canvas(struct six_draw **user_draw)
 		perror("open fb0");
 		goto err_open;
 	}
+	
+	ioctl(info->fd, FBIOGET_VSCREENINFO, &info->var);	//获取var对象
+	ioctl(info->fd, FBIOGET_FSCREENINFO, &info->fix);	//获取fix对象
+	
 	*user_draw = &draw;
-	canvas.addr = mmap(NULL, canvas.fix.smem_len, PROT_WRITE, MAP_SHARED, canvas.fd, 0);
+	canvas.addr = mmap(NULL, canvas.fix.smem_len, PROT_WRITE, MAP_SHARED, canvas.fd, 0);	//映射地址
 
 	return 0;
 err_open:
