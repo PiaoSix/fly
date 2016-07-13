@@ -1,5 +1,10 @@
+/*
+* display.h
+*/
+
+
 #include <stdio.h>
-//#include <unistd.h>
+#include <unistd.h>
 //#include <string.h>
 
 #include <fcntl.h>
@@ -24,23 +29,22 @@ struct display_info{
 	int fd;
 	struct fb_fix_screeninfo fix;
 	struct fb_var_screeninfo var;
-	u32 xsize, ysize, pixel_size;
+	u32 x_real_size, y_real_size, pixel_size;
 	void *addr;
-	void (* draw_pixel)(struct display_info *, u32 x, u32 y, u32 color);
+	void (* draw_pixel)(int x, int y, unsigned int color);
 };
 
-struct draw{
-	void (*pixel)(int x, int y, int size);
-	void (*line)(int x1, int y1, int x2, int y2, u32 color);
-	void (*draw_square)(int x, int y, int xlength, int ylength, u32 color);
+struct six_draw{
+	void (*print_display_info)();
+	void (*pixel)(int x, int y, unsigned int color);
+	void (*point)(int x, int y, unsigned int size, unsigned int color);
+	void (*line)(int x1, int y1, int x2, int y2, unsigned int color);
+	void (*square)(int x, int y, int xlength, int ylength, unsigned int color);
 };
 
-void print_display_info(struct display_info *);
-void draw_square(struct display_info *, u32 x, u32 y, u32 xlength, u32 ylength, u32 color);
-void draw_line(struct display_info *, s32 x1, s32 y1, s32 x2, s32 y2, u32 color);
 
-void draw_pixel_rgb888(struct display_info *,  u32 x, u32 y, u32 color);
-void draw_pixel_rgb565(struct display_info *,  u32 x, u32 y, u32 color);
+int make_canvas(struct six_draw **user_draw);
+int close_canvas();
 
 	
 	
