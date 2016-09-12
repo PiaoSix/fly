@@ -1,5 +1,6 @@
-out_dir = $(out_path)/board/display
-obj := display.o
+out_dir = $(out_path)/main
+obj := main.o
+CFLAGS += -I$(srctree)/board/include -I$(srctree)/game/include
 
 include $(srctree)/board/Makefile.rules
 #out_obj = $(foreach n, $(obj), $(out_dir)/$(n))

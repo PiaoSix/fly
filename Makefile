@@ -2,19 +2,36 @@
 export sub_target = build-in.o
 export srctree = $(shell pwd)
 export head_flag :=
-export CFLAGS := 
+export CFLAGS := -std=c99
 export LD = ld
-
+export CC = gcc
+export out_path := $(shell pwd)/out
+export srctree = $(shell pwd)
+export cut_line = -------------
 target := a.out
+out_dir = $(out_path)
 
-sub_dir += game
 sub_dir += board
+sub_dir += game
+sub_dir += main
+#a:
+#	echo $(out_path)
 
-all:
+BUILDDIR = $(out_dir) $(foreach n, $(sub_dir), $(out_dir)/$(n))
 
 
+all:$(BUILDDIR) $(sub_dir) $(target)
 
-.PHONY:clean $(sub_dir)
+$(target):
+	$(CC) $(CFLAGS) $(foreach n, $(sub_dir), $(out_dir)/$(n)/$(sub_target)) -o $(out_dir)/$@
 
-clean:
-	rm -f $(target) *.o *.d
+$(sub_dir):
+	@echo $(cut_line)$(cut_line) 开始子makefile $(cut_line)$(cut_line)
+	make -C $@
+
+$(BUILDDIR):
+	mkdir -p $@
+
+.PHONY:$(sub_dir) $(target)
+
+

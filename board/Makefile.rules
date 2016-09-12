@@ -1,0 +1,60 @@
+
+#中间层文件夹编译
+ifdef path
+out_dir = $(out_path)/$(notdir $(path))
+build_dir := $(foreach a, $(sub_dir), $(out_dir)/$(a))
+
+all:$(build_dir) $(sub_dir) $(sub_target)
+
+$(sub_target): 
+	$(LD) -r -o $(out_dir)/$@ $(foreach n, $(sub_dir), $(out_dir)/$(n)/$@)
+
+$(sub_dir):
+	@echo $(cut_line) $(notdir $(path)) 下 makefile $(cut_line)
+	make -C $@
+
+$(build_dir):
+	mkdir -p $@
+
+.PHONY:all $(sub_dir)
+
+endif
+
+#最底层具体文件编译
+ifdef obj
+
+out_obj = $(foreach n, $(obj), $(out_dir)/$(n))
+depends = $(patsubst $(out_dir)/%.o, $(out_dir)/%.d, $(out_obj))
+
+all:$(sub_target)
+
+$(sub_target): $(out_obj)
+	$(LD) -r -o $(out_dir)/$@ $^
+$(out_dir)/%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+include $(depends)
+
+$(out_dir)/%.d: %.c
+	set -e; rm -f $@; 
+	$(CC) -MM $(CFLAGS) $< > $@.$$$$; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+	rm -f $@.$$$$
+
+.PHONY: all
+
+endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
