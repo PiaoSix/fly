@@ -5,17 +5,17 @@ export head_flag :=
 export CFLAGS := -std=c99
 export LD = ld
 export CC = gcc
-export out_path := $(shell pwd)/out
+export out_tree := $(shell pwd)/out
 export srctree = $(shell pwd)
 export cut_line = -------------
 target := a.out
-out_dir = $(out_path)
+out_dir = $(out_tree)
 
 sub_dir += board
 sub_dir += game
 sub_dir += main
 #a:
-#	echo $(out_path)
+#	echo $(out_tree)
 
 BUILDDIR = $(out_dir) $(foreach n, $(sub_dir), $(out_dir)/$(n))
 
@@ -32,6 +32,9 @@ $(sub_dir):
 $(BUILDDIR):
 	mkdir -p $@
 
-.PHONY:$(sub_dir) $(target)
+.PHONY:$(sub_dir) $(target) clean
+
+clean:
+	rm -rf out test
 
 

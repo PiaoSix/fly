@@ -1,5 +1,4 @@
-path = $(srctree)/board
-sub_dir := display
+sub_dir += display
 CFLAGS += -I$(srctree)/board/include
 
 include $(srctree)/board/Makefile.rules

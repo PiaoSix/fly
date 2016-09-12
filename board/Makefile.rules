@@ -1,7 +1,9 @@
 
+path = $(subst $(srctree)/,,$(shell pwd))
+out_dir = $(out_tree)/$(path)
+
 #中间层文件夹编译
-ifdef path
-out_dir = $(out_path)/$(notdir $(path))
+ifndef obj
 build_dir := $(foreach a, $(sub_dir), $(out_dir)/$(a))
 
 all:$(build_dir) $(sub_dir) $(sub_target)
@@ -14,9 +16,10 @@ $(sub_dir):
 	make -C $@
 
 $(build_dir):
+	echo $(out_dir)
 	mkdir -p $@
 
-.PHONY:all $(sub_dir)
+.PHONY:all $(sub_dir) $(build_dir)
 
 endif
 
