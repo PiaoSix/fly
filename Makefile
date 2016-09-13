@@ -1,4 +1,3 @@
-#nullstring :=
 export sub_target = build-in.o
 export srctree = $(shell pwd)
 export head_flag :=

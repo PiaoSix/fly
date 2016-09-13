@@ -1,12 +1,9 @@
 /*
-*
 *main.c
 */
 
 #include <stdio.h>
 #include <unistd.h>
-//#include <string.h>
-//#include "display.h"
 #include "life_game.h"
 
 
