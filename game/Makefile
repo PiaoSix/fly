@@ -1,5 +1,5 @@
 sub_dir := life_game
-CFLAGS += -I$(srctree)/game/include
+CFLAGS += -I$(srctree)/game/include/life_game
 CFLAGS += -I$(srctree)/board/include
 
 

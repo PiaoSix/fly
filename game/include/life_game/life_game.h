@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 //#include <string.h>
-#include "life_game.h"
+#include "rules.h"
 #include "display.h"
 
 int life_game();
