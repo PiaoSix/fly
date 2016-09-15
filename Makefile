@@ -1,7 +1,7 @@
 export sub_target = build-in.o
 export srctree = $(shell pwd)
 export head_flag :=
-export CFLAGS := -std=c99
+export CFLAGS := -std=gnu99
 export LD = ld
 export CC = gcc
 export out_tree := $(shell pwd)/out

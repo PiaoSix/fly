@@ -1,7 +1,6 @@
 /*
 *life game
 */
-
 #include <time.h>
 #include "life_game.h"
 
@@ -64,7 +63,7 @@ void next_step()
 {
 	for(int i = 0; i < HEIGHT; ++i){
 		for(int j = 0; j < WIDTH; ++j){
-			tmp[i][j] = rule_entry(i, j, &save);
+			tmp[i][j] = rule_entry(i, j, save);
 		}
 	}
 }
