@@ -29,12 +29,13 @@ void init()
 
 void show()
 {
-	for(int i = 0; i < HEIGHT; ++i){
-		for(int j = 0; j < WIDTH; ++j){
-			if(save[i][j] == 1){
-				draw->pixel(i, j, RGB888(255,0,0));
+	for(int y = 0; y < HEIGHT; ++y){
+		for(int x = 0; x < WIDTH; ++x){
+			usleep(100);
+			if(save[y][x] == 1){
+				draw->pixel(x, y, RGB888(255,0,0));
 			}else{
-				draw->pixel(i, j, RGB888(0,0,0));
+				draw->pixel(x, y, RGB888(0,0,0));
 			
 			}
 		}
@@ -43,9 +44,9 @@ void show()
 
 void clean()
 {
-	for(int i = 0; i < HEIGHT; ++i){
-		for(int j = 0; j < WIDTH; ++j){
-			save[i][j] = 0;
+	for(int y = 0; y < HEIGHT; ++y){
+		for(int x = 0; x < WIDTH; ++x){
+			save[x][y] = 0;
 		}
 	}
 }
