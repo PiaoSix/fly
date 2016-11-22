@@ -2,7 +2,7 @@
 *life game
 */
 #include <time.h>
-#include "life_game.h"
+#include "dream.h"
 
 int save[HEIGHT][WIDTH] = {0};
 //int show_save[WIDTH][HEIGHT] = {0};
@@ -69,7 +69,7 @@ void next_step()
 	}
 }
 
-int life_game()
+int dream()
 {
 	int ret = 0;
 	ret = make_canvas(&draw);

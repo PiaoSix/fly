@@ -4,13 +4,13 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "life_game.h"
+#include "dream.h"
 
 
 int main(int argc, char **argv)
 {
 	printf("%s \n", __func__);
-	life_game();
+	dream();
 	
 	return 0;
 }

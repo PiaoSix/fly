@@ -9,16 +9,8 @@
 #include "rules.h"
 #include "display.h"
 
-int life_game();
+int dream();
 
 
 
-
-
-
-
-
-
-
-
-#endif //LIFE_GAME_H
+#endif //DREAM_H

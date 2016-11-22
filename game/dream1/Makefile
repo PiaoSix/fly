@@ -1,4 +1,4 @@
-obj += life_game.o
+obj += dream.o
 obj += rules.o
 
 include $(srctree)/board/Makefile.rules
