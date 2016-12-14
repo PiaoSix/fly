@@ -9,6 +9,7 @@ static int die_or_alive(int i, int j, const int save[HEIGHT][WIDTH])
 	int w, h;
 	int x, y;
 	int count_lifes = 0;
+	struct DNA * dna_p = NULL;
 
 	for(h = i - 1; h < i + 2; ++h){
 		if(h < 0){

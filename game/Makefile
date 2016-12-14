@@ -1,5 +1,5 @@
-sub_dir := life_game
-CFLAGS += -I$(srctree)/game/include/life_game
+include ./config
+CFLAGS += -I$(srctree)/game/include/dream
 CFLAGS += -I$(srctree)/board/include
 
 
